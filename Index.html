@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MW2 Remastered – Intel-Checkliste (Deutsch)</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            padding: 2rem 1rem;
+            line-height: 1.5;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #58a6ff;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .subtitle {
+            color: #8b949e;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 3px solid #58a6ff;
+            padding-left: 0.8rem;
+        }
+        .progress-wrapper {
+            background: #161b22;
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #30363d;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(6px);
+        }
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .progress-header span:last-child { color: #58a6ff; font-weight: 600; }
+        .progress-bar-bg {
+            width: 100%;
+            height: 12px;
+            background: #21262d;
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #58a6ff, #3fb950);
+            border-radius: 99px;
+            transition: width 0.25s ease;
+        }
+        .reset-btn {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: 0.2s;
+            float: right;
+            margin-top: 0.5rem;
+        }
+        .reset-btn:hover { background: #30363d; color: #f85149; border-color: #f85149; }
+        .mission {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .mission-header {
+            background: #1c2128;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #f0f6fc;
+            border-bottom: 1px solid #30363d;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .mission-header .count {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #8b949e;
+            background: #21262d;
+            padding: 0.15rem 0.6rem;
+            border-radius: 99px;
+        }
+        .mission-actions {
+            display: flex;
+            gap: 0.6rem;
+            align-items: center;
+        }
+        .btn-img {
+            background: #21262d;
+            border: 1px solid #30363d;
+            color: #58a6ff;
+            padding: 0.25rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .btn-img:hover { background: #30363d; border-color: #58a6ff; }
+        .intel-list { list-style: none; padding: 0.4rem 0; }
+        .intel-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.6rem 1rem;
+            border-bottom: 1px solid #21262d;
+            cursor: pointer;
+            transition: background 0.15s;
+            user-select: none;
+        }
+        .intel-item:last-child { border-bottom: none; }
+        .intel-item:hover { background: #1c2128; }
+        .intel-item input[type="checkbox"] { display: none; }
+        .checkbox-custom {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #30363d;
+            border-radius: 5px;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+            background: #0d1117;
+        }
+        .intel-item input:checked + .checkbox-custom {
+            background: #238636;
+            border-color: #238636;
+        }
+        .intel-item input:checked + .checkbox-custom::after {
+            content: "✔";
+            font-size: 13px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .intel-text { font-size: 0.9rem; color: #c9d1d9; transition: 0.15s; }
+        .intel-item input:checked ~ .intel-text {
+            text-decoration: line-through;
+            color: #484f58;
+        }
+        .intel-num {
+            font-weight: 600;
+            color: #58a6ff;
+            margin-right: 0.3rem;
+            font-size: 0.8rem;
+        }
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #484f58;
+        }
+        .footer kbd {
+            background: #21262d;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🎯 MW2 Campaign Remastered</h1>
+    <div class="subtitle">Alle 45 Aufklärungsdaten – auf Deutsch, mit Bild-Links pro Mission.</div>
+
+    <div class="progress-wrapper">
+        <div class="progress-header">
+            <span>Fortschritt</span>
+            <span id="progress-text">0 / 45</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-bar"></div>
+        </div>
+        <button class="reset-btn" id="reset-btn">↺ Alle zurücksetzen</button>
+    </div>
+
+    <div id="missions-container"></div>
+
+    <div class="footer">
+        Einfach abhaken – der Fortschritt wird automatisch im Browser gespeichert.<br>
+        <kbd>F5</kbd> zum Neuladen.
+    </div>
+</div>
+
+<script>
+    // ====== DATEN: Alle 45 Intel, auf Deutsch, nach Missionen ======
+    const intelData = [
+        {
+            mission: "Die alte Leier",
+            intels: [
+                { id: 1, desc: "Nachdem ihr den Basketballplatz passiert habt, findet ihr den Laptop am Wachturm in der linken Ecke." },
+                { id: 2, desc: "Im zweiten Stock der Schule, im Klassenraum, kurz bevor ihr nach draußen geht." },
+                { id: 3, desc: "Nachdem ihr die Schule verlasst, direkt auf einer Kiste neben dem Taxi." }
+            ]
+        },
+        {
+            mission: "Cliffhanger",
+            intels: [
+                { id: 4, desc: "Auf dem Wachturm am Eingang der Basis." },
+                { id: 5, desc: "Wenn ihr euch wieder mit MacTavish außerhalb der Hütte mit dem ACS-Modul trefft, dreht euch um. Im anderen Haus direkt am Fenster." },
+                { id: 6, desc: "Bei der Fahrt mit dem Schneemobil nach etwa 25 Sekunden, zwischen den Bäumen." }
+            ]
+        },
+        {
+            mission: "Zugriff",
+            intels: [
+                { id: 7, desc: "Im ersten Dorfabschnitt im Haus mit dem Stacheldrahtfenster. Am Zaun, wo der Hund angreift, rechts halten, erstes offenes Haus rechts, dann erster Eingang links hinter dem Motorrad." },
+                { id: 8, desc: "Am Haus mit der Leiter beim Hügel – hochklettern und auf den Tisch schauen." },
+                { id: 9, desc: "Direkt nach dem Haus am Hügel mit der Leiter: in das gemauerte Haus links, auf dem Holztisch." },
+                { id: 10, desc: "Beim brennenden Auto den Eingang nehmen, Treppen runter, zwischen den Betten auf dem Holztisch." }
+            ]
+        },
+        {
+            mission: "Wolverines!",
+            intels: [
+                { id: 11, desc: "In der Tankstelle auf dem Tresen." },
+                { id: 12, desc: "Im CRB-Finanzgebäude (gegenüber von „Nates“) auf einem Schreibtisch." },
+                { id: 13, desc: "Im Müllcontainer vor Burger Town." },
+                { id: 14, desc: "Im Taco-Restaurant gegenüber von „Nates“ auf einem kleinen grauen Tisch." }
+            ]
+        },
+        {
+            mission: "Das Hornissennest",
+            intels: [
+                { id: 15, desc: "Im Dorf nach den beiden Trucks, den ersten Eingang rechts nehmen." },
+                { id: 16, desc: "Nach dem Basketballfeld in einem kleinen Verschlag auf dem Schrottfeld – auf die Ölfässer achten!" },
+                { id: 17, desc: "Nach dem Schrottfeld die lange Straße den Hügel hoch. Beim blauen Auto den linken Eingang nehmen, Treppe hoch, auf dem Tisch." },
+                { id: 18, desc: "Am Fußballfeld (Landezone), im Fenster hinter dem Tor." }
+            ]
+        },
+        {
+            mission: "Exodus",
+            intels: [
+                { id: 19, desc: "Bei den Garden-Villa-Apartments in einem kleinen Büro, auf dem braunen Holztisch." },
+                { id: 20, desc: "Am Checkpoint in das kleine Büro rechts schauen." },
+                { id: 21, desc: "Nach der Brücke ins zweite Haus rechts, in den zweiten Stock, auf der gelben Sitzgelegenheit." }
+            ]
+        },
+        {
+            mission: "Der einzig schöne Tag ... war gestern",
+            intels: [
+                { id: 22, desc: "Nach den Stufen nach oben rechts im Regal." },
+                { id: 23, desc: "Kurz bevor es in den dritten Stock geht, nach dem zweiten Raum rechts ins Metallregal auf Kopfhöhe schauen." },
+                { id: 24, desc: "Im dritten Stock im Raum neben der Treppe zum Top-Deck, direkt unter der gelben Treppe." }
+            ]
+        },
+        {
+            mission: "Der Gulag",
+            intels: [
+                { id: 25, desc: "Die Treppen hoch, kurz bevor ihr ins Gefängnis geht." },
+                { id: 26, desc: "Im hinteren Bereich des Kontrollraums auf dem Tisch (heller Bildschirm)." },
+                { id: 27, desc: "In Zelle 327 auf dem Tisch." },
+                { id: 28, desc: "Nachdem ihr Price gesichert habt, durch das Loch zurück, auf dem hellen Tisch." }
+            ]
+        },
+        {
+            mission: "Auf eigene Verantwortung",
+            intels: [
+                { id: 29, desc: "Im Fahrstuhl, der wegen einer Leiche nicht richtig schließt." },
+                { id: 30, desc: "Zwei Stufen hoch, den Schützen hinter der Tür links erledigen, dann neben der Pflanze." }
+            ]
+        },
+        {
+            mission: "Notfall",
+            intels: [
+                { id: 31, desc: "Bei der 3er-Patrouille zwischen den Bäumen auf der Vorratskiste." },
+                { id: 32, desc: "Im Gebäude mit der Nummer 33 auf dem Tisch links." },
+                { id: 33, desc: "Kurz vor dem U-Boot die Stufen hoch, links auf den Kisten." }
+            ]
+        },
+        {
+            mission: "Weißes Haus",
+            intels: [
+                { id: 34, desc: "Im Westflügel, nachdem der Teamkamerad die Tür aufgeschossen hat, auf der schwarzen Couch links." },
+                { id: 35, desc: "Kurz bevor ihr zum Dach gelangt, auf einem kleinen Schrank vor dem Fenster." }
+            ]
+        },
+        {
+            mission: "Lose Enden",
+            intels: [
+                { id: 36, desc: "Am Bootshaus auf der Vorratskiste." },
+                { id: 37, desc: "Im aufgebrochenen Kellerraum mit der Waffenkammer, auf der Kiste hinter dem Blutfleck." },
+                { id: 38, desc: "Im Schlafzimmer oben auf dem Tisch am Fenster." }
+            ]
+        },
+        {
+            mission: "Der Feind meines Feindes",
+            intels: [
+                { id: 39, desc: "Direkt nach dem Start im Flugzeugwrack rechts." },
+                { id: 40, desc: "In der Mitte des Levels nach dem großen Flugzeugwrack, wo ein zweites Flugzeug mit der Spitze zu euch zeigt – auf der Treppe zum Cockpit." }
+            ]
+        },
+        {
+            mission: "Wie in alten Zeiten",
+            intels: [
+                { id: 41, desc: "Im großen Raum bei der rauchenden Wache, hinten auf einer Kiste." },
+                { id: 42, desc: "Im großen Raum links, kurz bevor es wieder nach draußen geht – auf das helle Leuchten des Bildschirms achten." },
+                { id: 43, desc: "Nach der Rauch-Szene nicht über die Holzplanken, sondern in die Höhle hinter euch – zwischen den Papierkisten." },
+                { id: 44, desc: "Im Raum mit der Türkontrolle auf dem Tisch links neben Price, zwischen den Dosen." }
+            ]
+        },
+        {
+            mission: "Endphase",
+            intels: [
+                { id: 45, desc: "Am Dock kurz bevor ihr ins Boot einsteigt, auf der kleinen Holzkiste." }
+            ]
+        }
+    ];
+
+    // ====== STATE & LOCAL STORAGE ======
+    const STORAGE_KEY = 'mw2_remastered_intel_checklist_de';
+    let checkedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+    // ====== RENDER ======
+    const container = document.getElementById('missions-container');
+    const progressText = document.getElementById('progress-text');
+    const progressBar = document.getElementById('progress-bar');
+
+    function render() {
+        container.innerHTML = '';
+
+        intelData.forEach(mission => {
+            if (mission.intels.length === 0) return;
+
+            const missionDiv = document.createElement('div');
+            missionDiv.className = 'mission';
+
+            // Suchbegriff für Google Bilder
+            const suchbegriff = encodeURIComponent(`MW2 Remastered ${mission.mission} Intel`);
+            const bildLink = `https://www.google.com/search?tbm=isch&q=${suchbegriff}`;
+
+            const header = document.createElement('div');
+            header.className = 'mission-header';
+            header.innerHTML = `
+                <span>${mission.mission}</span>
+                <div class="mission-actions">
+                    <span class="count">${mission.intels.length} Intel</span>
+                    <a class="btn-img" href="${bildLink}" target="_blank" rel="noopener">🖼️ Bilder</a>
+                </div>
+            `;
+            missionDiv.appendChild(header);
+
+            const list = document.createElement('ul');
+            list.className = 'intel-list';
+
+            mission.intels.forEach(intel => {
+                const li = document.createElement('li');
+                li.className = 'intel-item';
+
+                const isChecked = !!checkedState[intel.id];
+
+                li.innerHTML = `
+                    <input type="checkbox" id="intel-${intel.id}" ${isChecked ? 'checked' : ''}>
+                    <span class="checkbox-custom"></span>
+                    <span class="intel-text">
+                        <span class="intel-num">#${intel.id}</span>${intel.desc}
+                    </span>
+                `;
+
+                li.addEventListener('click', (e) => {
+                    const cb = li.querySelector('input[type="checkbox"]');
+                    if (e.target !== cb) {
+                        cb.checked = !cb.checked;
+                    }
+                    cb.dispatchEvent(new Event('change'));
+                });
+
+                const checkbox = li.querySelector('input[type="checkbox"]');
+                checkbox.addEventListener('change', () => {
+                    checkedState[intel.id] = checkbox.checked;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
+                    updateProgress();
+                });
+
+                list.appendChild(li);
+            });
+
+            missionDiv.appendChild(list);
+            container.appendChild(missionDiv);
+        });
+
+        updateProgress();
+    }
+
+    function updateProgress() {
+        const total = 45;
+        let checked = 0;
+        for (let i = 1; i <= total; i++) {
+            if (checkedState[i]) checked++;
+        }
+        progressText.textContent = `${checked} / ${total}`;
+        const percent = (checked / total) * 100;
+        progressBar.style.width = percent + '%';
+    }
+
+    // ====== RESET ======
+    document.getElementById('reset-btn').addEventListener('click', () => {
+        if (confirm('Wirklich alle Häkchen zurücksetzen?')) {
+            checkedState = {};
+            localStorage.removeItem(STORAGE_KEY);
+            render();
+        }
+    });
+
+    // ====== INIT ======
+    render();
+</script>
+</body>
+</html>
